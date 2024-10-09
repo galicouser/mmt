@@ -80,7 +80,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
                 <div className="form-group">
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}  // Replace with your reCAPTCHA site key
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}  // Replace with your reCAPTCHA site key
                     onChange={(value) => setFieldValue('captchaValue', value)}
                   />
                   <ErrorMessage name="captchaValue" component="div" className="error-message" />

@@ -2,7 +2,6 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const fetch = require('node-fetch'); // Add this if not already included
 const dotenv = require('dotenv'); // Import dotenv to load environment variables
 const app = express(); 
 

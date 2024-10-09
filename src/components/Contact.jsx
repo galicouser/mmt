@@ -7,8 +7,6 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import backgroundImg from '../assets/images/services/background.jpeg'; // Adjust this path to your background image
 import contact_form_img from '../assets/images/contact_form/contact_form.jpeg';
 
-// Load environment variables
-require('dotenv').config();
 
 const Contact = () => {
   const [captchaValue, setCaptchaValue] = useState(null);
@@ -96,7 +94,7 @@ const Contact = () => {
               </div>
 
               <ReCAPTCHA
-                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} // Use the site key from .env
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} // Use the site key from .env
                 onChange={setCaptchaValue}
                 className="mb-4"
               />
