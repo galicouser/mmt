@@ -4,10 +4,11 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import About from './components/About';
-import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
-import WhyChoose from './components/WhyChoose'; // Import the WhyChoose component
+import Videos from './components/Videos';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const App = () => {
   return (
@@ -20,11 +21,9 @@ const App = () => {
             <Route path="/services" element={<Services />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/videos" element={<div>Videos Page</div>} />
+            <Route path="/videos" element={<Videos/>} />
           </Routes>
-          <WhyChoose /> {/* Add WhyChoose component here */}
         </main>
-        <Testimonials />
         <Footer />
       </div>
     </Router>

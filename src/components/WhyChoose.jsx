@@ -5,7 +5,7 @@ import { faLeaf, faHome, faCheckCircle, faShieldAlt } from '@fortawesome/free-so
 const WhyChoose = () => {
   return (
     <section className="p-6 bg-gray-100">
-      <h2 className="text-3xl font-bold text-center mb-6 text-black">Why Choose Total Home Cleaning?</h2>
+      <h2 className="text-3xl font-bold text-center mb-6 text-black">Why Choose Maggies Magic Touch?</h2>
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         
         <div className="bg-white p-4 rounded shadow flex items-start">

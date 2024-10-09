@@ -37,4 +37,7 @@
     font-size: 1rem;
     color: #555;
   }
-  
+  /* styles.css */
+.image-padding {
+  padding: 15px; /* Adjust this value as needed */
+}
