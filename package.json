@@ -1,13 +1,17 @@
 {
-  "name": "my-cleaning-site",
+  "name": "maggiesmagictouch",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "concurrently \"vite --host\" \"nodemon server/index.js\"",
+    "build": "vite build && npx webpack",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "vite build && vite preview --host",
+    "test:watch": "npx jest --watch --detectOpenHandles",
+    "build-watch": "concurrently \"npx webpack --watch --mode development\" \"npm run sass\"",
+    "sass": "node-sass public/styles/main.scss public/styles/style.css -w",
+    "build:dev": "vite build && nodemon server/index.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
@@ -16,7 +20,10 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.5.0",
-    "emailjs-com": "^3.2.0",
+    "body-parser": "^1.20.3",
+    "concurrently": "^9.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
     "formik": "^2.4.6",
     "nodemailer": "^6.9.15",
     "react": "^18.3.1",
@@ -24,6 +31,7 @@
     "react-dom": "^18.3.1",
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.53.0",
+    "react-modal": "^3.16.1",
     "react-player": "^2.16.0",
     "react-router-dom": "^6.26.2",
     "react-slick": "^0.30.2",
@@ -45,5 +53,13 @@
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.1"
-  }
+  },
+  "config": {
+    "production_url": "https://mmt.galico.io"
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
 import backgroundImg from '../assets/images/services/background.jpeg'; // Adjust this path to your background image
+import contact_form_img from '../assets/images/contact_form/contact_form.jpeg';
 
 const Contact = () => {
   const [captchaValue, setCaptchaValue] = useState(null);
@@ -62,10 +63,10 @@ const Contact = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit} 
       >
         {({ isSubmitting }) => (
-          <Form className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+          <Form className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md" style={{ backgroundImage: `url(${contact_form_img})`, backgroundSize: 'cover', backgroundPosition: '' }}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
               <Field type="text" name="name" className="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring focus:ring-blue-500" />
