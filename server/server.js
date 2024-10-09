@@ -2,7 +2,11 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const fetch = require('node-fetch'); // Add this if not already included
+const dotenv = require('dotenv'); // Import dotenv to load environment variables
 const app = express(); 
+
+dotenv.config(); // Load environment variables from .env file
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -10,7 +14,7 @@ app.use(bodyParser.json());
 
 // Helper function for reCAPTCHA verification
 async function verifyRecaptcha(captchaValue) {
-  const secretKey = '6LcPK1wqAAAAAGbDr3zABKOzQPdajUjRy-tIMc78'; // replace with your actual secret key
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY; // Use the environment variable
   const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaValue}`;
   
   const response = await fetch(verifyUrl, { method: 'POST' });
@@ -23,14 +27,14 @@ async function sendEmail(fromEmail, subject, text) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'admin@domainstacks.net', // your email
-      pass: 'tdtdakehjinnkspk', // your email password
+      user: process.env.EMAIL_USER, // Use the environment variable
+      pass: process.env.EMAIL_PASS, // Use the environment variable
     },
   });
 
   const mailOptions = {
     from: fromEmail,
-    to: 'admin@domainstacks.net', // your receiving email
+    to: process.env.EMAIL_RECEIVER, // Use the environment variable
     subject: subject,
     text: text,
   };

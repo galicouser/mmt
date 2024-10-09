@@ -49,8 +49,12 @@ const ContactModal = ({ isOpen, closeModal }) => {
             &times;
           </button>
           <h2 className="modal-title">Get a Free Quote</h2>
-          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
-            {({ isSubmitting }) => (
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting, setFieldValue }) => (
               <Form>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
@@ -76,11 +80,8 @@ const ContactModal = ({ isOpen, closeModal }) => {
                 <div className="form-group">
                   <ReCAPTCHA
                     ref={recaptchaRef}
-                    sitekey="6LcPK1wqAAAAAD_VWx43MM" // Replace with your reCAPTCHA site key
-                    onChange={(value) => {
-                      // Set the captcha value in formik's state
-                      values.captchaValue = value;
-                    }}
+                    sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}  // Replace with your reCAPTCHA site key
+                    onChange={(value) => setFieldValue('captchaValue', value)}
                   />
                   <ErrorMessage name="captchaValue" component="div" className="error-message" />
                 </div>
