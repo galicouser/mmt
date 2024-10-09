@@ -11,7 +11,7 @@ import contact_form_img from '../assets/images/contact_form/contact_form.jpeg';
 const Contact = () => {
   const [captchaValue, setCaptchaValue] = useState(null);
   const [submitted, setSubmitted] = useState(false);
-  console.log('Recaptcha Site Key:', VITE_RECAPTCHA_SITE_KEY);
+  // console.log('Recaptcha Site Key:', import.meta.env.VITE_RECAPTCHA_SITE_KEY);
 
 
   const initialValues = {
@@ -96,7 +96,7 @@ const Contact = () => {
               </div>
 
               <ReCAPTCHA
-                sitekey={VITE_RECAPTCHA_SITE_KEY} // Use the site key from .env
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY} // Use the site key from .env
                 onChange={setCaptchaValue}
                 className="mb-4"
               />
