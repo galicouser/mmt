@@ -11,6 +11,8 @@ import contact_form_img from '../assets/images/contact_form/contact_form.jpeg';
 const Contact = () => {
   const [captchaValue, setCaptchaValue] = useState(null);
   const [submitted, setSubmitted] = useState(false);
+  console.log('Recaptcha Site Key:', import.meta.env.VITE_RECAPTCHA_SITE_KEY);
+
 
   const initialValues = {
     name: '',

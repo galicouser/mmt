@@ -6,6 +6,7 @@ import '../assets/css/modal.css'; // Import your CSS file for the modal
 import backgroundImg from '../assets/images/contact_form/contact_form.jpeg';
 
 const ContactModal = ({ isOpen, closeModal }) => {
+  console.log('Recaptcha Site Key:', import.meta.env.VITE_RECAPTCHA_SITE_KEY);
   const initialValues = { name: '', email: '', phone: '', message: '', captchaValue: '' };
 
   const validationSchema = Yup.object({
