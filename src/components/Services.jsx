@@ -48,7 +48,7 @@ const Services = () => {
           {servicesList.map((service, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden text-center relative w-96 h-100 transform transition duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
+              className="bg-white rounded-lg shadow-lg overflow-hidden text-center relative transform transition h-100 duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
             >
               <img 
                 src={service.img} 
