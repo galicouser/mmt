@@ -42,7 +42,7 @@ const Services = () => {
       className="flex bg-gray-100 py-10" 
       style={{ backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <h2 className="rounded-full shadow-lg text-3xl font-bold text-center mb-8 text-blue-900 bg-gray-300 w-64 mx-auto">Our Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-8">
           {servicesList.map((service, index) => (

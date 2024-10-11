@@ -22,8 +22,7 @@ const Videos = () => {
     >
       
       <div className="container mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4 text-blue-900">Videos</h2>
-        <p className="text-center mb-10 text-gray-600 text-lg">Check out our cleaning service videos.</p>
+      <h2 className="rounded-full shadow-lg text-3xl font-bold text-center mb-8 text-blue-900 bg-gray-300 w-64 mx-auto">Videos</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {videoUrls.map((url, index) => (
             <div 
