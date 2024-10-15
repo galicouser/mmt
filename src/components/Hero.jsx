@@ -69,7 +69,7 @@ const Hero = () => {
       />
       {/* Overlay content */}
       <div className="absolute inset-0 flex flex-col items-start justify-center bg-blue-900 bg-opacity-60 p-4 md:p-8 lg:p-12 rounded-lg">
-        <h1 className="retro-text font-extrabold mb-2 md:mb-4 text-2xl md:text-4xl lg:text-5xl text-white">
+        <h1 className="retro-text font-extrabold mb-2 md:mb-4 text-2xl md:text-4xl lg:text-5xl">
           Sparkling Clean Homes, Every Time
         </h1>
         <p className="text-sm md:text-lg lg:text-xl text-white mb-4 md:mb-6 lg:mb-8">
