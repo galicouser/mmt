@@ -1,64 +1,132 @@
 import React from 'react';
-
-// Import images directly
-import houseCleaningImg from '../assets/images/services/0.png'; // Adjust the path
-import officeCleaningImg from '../assets/images/services/1.png'; // Adjust the path
-import windowCleaningImg from '../assets/images/services/2.png'; // Adjust the path
-import moveCleaningImg from '../assets/images/services/3.png'; // Adjust the path
-import deepCleaningImg from '../assets/images/services/0.png'; // Adjust the path
-import backgroundImg from '../assets/images/services/background.jpeg'; // Adjust this path to your background image
+import { FaBath, FaUtensils, FaCouch, FaBed } from 'react-icons/fa'; // Import FontAwesome icons
 
 const servicesList = [
   {
-    name: "House Cleaning",
-    description: "Our comprehensive house cleaning services ensure your home stays spotless and fresh, no matter the size. From dusting to deep cleaning, we've got you covered.",
-    img: houseCleaningImg,
+    name: "Bathrooms",
+    icon: <FaBath className="text-blue-900 text-5xl" />,
+    headingone: "On Every Visit We Clean:",
+    headingonedetails: [
+      "Showers and other high-touch areas cleaned and sanitized.",
+      "Toilets thoroughly cleaned and sanitized.",
+      "Shower doors, vanity, sinks, and counters wiped.",
+      "Floors cleaned and sanitized; carpets vacuumed.",
+      // Additional details added based on image
+      "Mirrors cleaned.",
+      "Towels restocked if provided.",
+      "Waste bins emptied.",
+      "Air fresheners checked and replaced if necessary."
+    ],
+    headingtwo: "On Detail Rotation Day, We Add:",
+    headingtwodetails: [
+      "Tile grouting scrubbed.",
+      "Shower door tracks cleaned.",
+      "Additional hand-wiping of doors, frames, and cabinets.",
+      // Additional details added based on image
+      "Exhaust fans dusted.",
+      "Behind toilets cleaned.",
+      "Light fixtures dusted and cleaned."
+    ],
   },
   {
-    name: "Office Cleaning",
-    description: "Keep your workplace clean and productive with our office cleaning services.",
-    img: officeCleaningImg,
+    name: "Kitchen & Eating Areas",
+    icon: <FaUtensils className="text-blue-900 text-5xl" />,
+    headingone: "On Every Visit We Clean:",
+    headingonedetails: [
+      "Counters and high-touch surfaces wiped and sanitized.",
+      "Sinks cleaned and chrome fixtures shined.",
+      "Appliance exteriors wiped.",
+      "Floors swept, vacuumed, and mopped.",
+      // Additional details added based on image
+      "Tables and chairs wiped down.",
+      "Waste bins emptied.",
+      "Small appliances wiped.",
+      "Inside of the refrigerator spot cleaned if necessary."
+    ],
+    headingtwo: "On Detail Rotation Day, We Add:",
+    headingtwodetails: [
+      "Inside of microwave cleaned.",
+      "Cabinet fronts hand-wiped.",
+      "Range top scrubbed thoroughly.",
+      // Additional details added based on image
+      "Oven cleaned if necessary.",
+      "Dishwasher wiped down inside and out.",
+      "Pantry shelves dusted."
+    ],
   },
   {
-    name: "Window Cleaning",
-    description: "Get crystal clear windows with our professional window cleaning services.",
-    img: windowCleaningImg,
+    name: "Living Areas",
+    icon: <FaCouch className="text-blue-900 text-5xl" />,
+    headingone: "On Every Visit We Clean:",
+    headingonedetails: [
+      "Furniture and décor dusted.",
+      "Floors cleaned and sanitized; carpets vacuumed.",
+      "Cobwebs removed and surfaces wiped.",
+      // Additional details added based on image
+      "Cushions and throws arranged.",
+      "Light switches and door handles disinfected.",
+      "Remotes and electronics dusted."
+    ],
+    headingtwo: "On Detail Rotation Day, We Add:",
+    headingtwodetails: [
+      "Detailed dusting of baseboards and window sills.",
+      "Upholstery vacuumed.",
+      // Additional details added based on image
+      "Artwork and picture frames cleaned.",
+      "Bookshelves dusted and organized."
+    ],
   },
   {
-    name: "Move In/Out Cleaning",
-    description: "Make your moving experience easier with our move in/out cleaning services.",
-    img: moveCleaningImg,
-  },
-  {
-    name: "Deep Cleaning",
-    description: "Our deep cleaning service tackles the toughest dirt and grime in your home.",
-    img: deepCleaningImg,
+    name: "Sleeping Areas",
+    icon: <FaBed className="text-blue-900 text-5xl" />,
+    headingone: "On Every Visit We Clean:",
+    headingonedetails: [
+      "Beds made; linens changed if provided.",
+      "Floors cleaned and carpets vacuumed.",
+      "Surfaces dusted and cobwebs removed.",
+      // Additional details added based on image
+      "Nightstands wiped down.",
+      "Light fixtures cleaned.",
+      "Closets straightened and organized."
+    ],
+    headingtwo: "On Detail Rotation Day, We Add:",
+    headingtwodetails: [
+      "Detailed dusting of baseboards and window sills.",
+      "Doors and frames wiped clean.",
+      // Additional details added based on image
+      "Behind and under furniture dusted.",
+      "Mirrors cleaned and organized."
+    ],
   },
 ];
 
 const Services = () => {
   return (
-    <section 
-      className="flex bg-gray-100 py-10" 
-      style={{ backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
-    >
+    <section className="flex bg-gray-100 py-10">
       <div className="container mx-auto px-4">
         <h2 className="rounded-full shadow-lg text-3xl font-bold text-center mb-8 text-blue-900 bg-gray-300 w-64 mx-auto">Our Services</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-1 gap-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-x-4 gap-y-8">
           {servicesList.map((service, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-lg shadow-lg overflow-hidden text-center relative transform transition h-100 duration-300 ease-in-out hover:scale-105 hover:shadow-2xl"
+              className="bg-white rounded-lg shadow-lg overflow-hidden text-center relative transform transition h-100 duration-300 ease-in-out hover:scale-105 hover:shadow-2xl p-4"
             >
-              <img 
-                src={service.img} 
-                alt={service.name} 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 flex flex-col items-start items-center justify-start text-left p-4 bg-opacity-50">
-                <h3 className="text-2xl font-bold text-blue-900 mb-2">{service.name}</h3>
-                <p className="text-blue-900 text-center">{service.description}</p>
+              <div className="flex justify-center mb-4">
+                {service.icon}
               </div>
+              <h3 className="text-2xl font-bold text-blue-900 mb-2">{service.name}</h3>
+              <h4 className="text-blue-900 font-bold mb-2">{service.headingone}</h4>
+              <ul className="list-disc text-left pl-4 mt-2 space-y-1 text-blue-900">
+                {service.headingonedetails.map((detail, i) => (
+                  <li key={i}>{detail}</li>
+                ))}
+              </ul>
+              <h4 className="text-blue-900 font-bold mt-4 mb-2">{service.headingtwo}</h4>
+              <ul className="list-disc text-left pl-4 mt-2 space-y-1 text-blue-900">
+                {service.headingtwodetails.map((detail, i) => (
+                  <li key={i}>{detail}</li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
