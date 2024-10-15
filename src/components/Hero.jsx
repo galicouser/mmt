@@ -19,15 +19,7 @@ const Hero = () => {
                 {/* Video Section */}
                 <div className="relative w-full md:w-1/2 flex items-center justify-center">
           <div className="rounded-lg overflow-hidden h-96 flex items-center justify-center">
-            <ReactPlayer
-              url={videoSource}
-              playing={true}
-              loop={true}
-              muted={true}
-              width="100%"
-              height="100%"
-              style={{ border: 'none' }}
-            />
+            {/* add content here */}
           </div>
         </div>
         {/* Text and Image Section */}

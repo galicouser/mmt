@@ -1,63 +1,59 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLeaf, faHome, faCheckCircle, faShieldAlt } from '@fortawesome/free-solid-svg-icons';
-
-const WhyChoose = () => {
+import '../assets/css/MaggieAd.css'; // Import your CSS file for the modal
+const MaggieAd = () => {
   return (
-    <section className="p-6 bg-gray-100">
-      {/* Section title */}
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 text-black">
-        Why Choose Maggie's Magic Touch?
-      </h2>
+    <section className="text-black">
+      {/* Header */}
+      {/* <div className="bg-red-600 text-white text-center py-4 rounded-t-md">
+        <h2 className="text-2xl md:text-3xl font-bold">MAGGIE'S MAGIC TOUCH</h2>
+        <p className="text-lg">CLEANING SERVICE</p>
+      </div> */}
 
-      {/* Responsive grid */}
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Card 1 */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-          <FontAwesomeIcon icon={faLeaf} className="text-3xl md:text-4xl text-black" />
+      {/* Content */}
+      <div className="bg-white p-6 rounded-b-md shadow-md">
+        <div className="flex flex-col md:flex-row justify-between mb-4">
+          <div className="mb-4 md:mb-0">
+            <h3 className="text-xl font-semibold">Experienced & Responsible!</h3>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>Homes</li>
+              <li>Apartments</li>
+              <li>Offices</li>
+              <li>Condos</li>
+            </ul>
+          </div>
           <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-black">Eco-Friendly</h3>
-            <p className="text-sm md:text-base text-black">
-              We carefully selected a combination of green and conventional products for a super clean that is safe and effective. We are also good stewards of Mother Nature.
-            </p>
+          <p className="text-lg tilt-animation">Good Work at Low Prices!</p>
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">We offer full cleaning services:</h3>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>Vacuuming • Dusting • Blinds</li>
+              <li>Furniture • Stoves • Microwaves</li>
+              <li>Window Sills • Cabinets • Doors</li>
+              <li>Ceiling Fans and more!</li>
+            </ul>
           </div>
         </div>
 
-        {/* Card 2 */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-          <FontAwesomeIcon icon={faHome} className="text-3xl md:text-4xl text-black" />
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-black">Locally Owned</h3>
-            <p className="text-sm md:text-base text-black">
-              Unlike corporate franchises, we thrive because of our location, not in spite of it.
-            </p>
-          </div>
+        {/* Contact Info */}
+        <div className="text-center">
+          <p className="text-lg mb-2">
+            <span className="font-bold">Call:</span> 267-597-7272
+          </p>
+          <p className="text-sm">please leave a message, we'll return your call promptly</p>
+          <p className="text-sm">
+            <span className="font-bold">Email:</span> margaretclean@hotmail.com
+          </p>
+          
         </div>
-
-        {/* Card 3 */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-          <FontAwesomeIcon icon={faCheckCircle} className="text-3xl md:text-4xl text-black" />
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-black">Professional Service</h3>
-            <p className="text-sm md:text-base text-black">
-              Your home is your most personal space and your biggest investment. We invest heavily in training to deliver the highest level of professionalism and care.
-            </p>
-          </div>
-        </div>
-
-        {/* Card 4 */}
-        <div className="bg-white p-6 rounded-lg shadow-md flex items-start space-x-4">
-          <FontAwesomeIcon icon={faShieldAlt} className="text-3xl md:text-4xl text-black" />
-          <div>
-            <h3 className="text-xl md:text-2xl font-semibold text-black">Healthier Environment</h3>
-            <p className="text-sm md:text-base text-black">
-              We’ve been color coding tools since the start to keep germs from hopping between areas. Add pro vacuums with an advanced ProLevel Filtration and the result is healthier air in your home.
-            </p>
-          </div>
-        </div>
+        
       </div>
+      <div className="bg-blue-300 p-4 rounded-md mb-4 text-center">
+          <p className="font-bold">You make the mess, we do the rest!</p>
+          <p className="text-sm">Good References | FREE ESTIMATES | Call Today!</p>
+        </div>
     </section>
   );
 };
 
-export default WhyChoose;
+export default MaggieAd;

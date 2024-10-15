@@ -6,15 +6,15 @@ import 'slick-carousel/slick/slick-theme.css'; // Import slick carousel CSS
 const testimonialsData = [
   {
     name: 'Sarah W.',
-    review: 'Maggie\'s Magic Touch has transformed my home! Their attention to detail is incredible, and the staff is so friendly and professional.',
+    review: 'Absolutely amazing!! My house has never been this clean.',
   },
   {
     name: 'John D.',
-    review: 'The best cleaning service I\'ve ever hired. They always go above and beyond to ensure my home is sparkling.',
+    review: 'I can\'t say enough about them',
   },
   {
     name: 'Emily R.',
-    review: 'I have never been more satisfied with a cleaning service. Highly recommend Maggie\'s Magic Touch for their excellent work!',
+    review: 'I don\'t think my house has been this clean since it was built',
   },
   {
     name: 'Michael T.',
@@ -53,8 +53,11 @@ const Testimonials = () => {
       <div className="container mx-auto px-4 text-center">
         {/* Section Title */}
         <h2 className="text-2xl md:text-4xl font-bold text-blue-900 mb-8 md:mb-10">
-          What Our Clients Say
+          Here's what Angie's List subscribers have to say:
         </h2>
+        <p className="text-2xl font-bold text-blue-900 mb-8 md:mb-10">
+          A Ratings on Angie's List
+        </p>
         
         {/* Slider */}
         <Slider {...settings}>
