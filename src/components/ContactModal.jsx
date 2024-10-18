@@ -6,14 +6,14 @@ import '../assets/css/modal.css'; // Import your CSS file for the modal
 import backgroundImg from '../assets/images/contact_form/contact_form.jpeg';
 
 const ContactModal = ({ isOpen, closeModal }) => {
-  // console.log('Recaptcha Site Key:', import.meta.env.VITE_RECAPTCHA_SITE_KEY);
-  const initialValues = { name: '', email: '', phone: '', message: '', captchaValue: '' };
+  const initialValues = { name: '', email: '', phone: '', message: '', dateTime: '', captchaValue: '' };
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email format').required('Email is required'),
     phone: Yup.string().required('Phone number is required'),
     message: Yup.string().required('Message is required').min(10, 'Message must be at least 10 characters long'),
+    dateTime: Yup.string().required('Please select a date and time'),
     captchaValue: Yup.string().required('Please complete the reCAPTCHA'),
   });
 
@@ -77,7 +77,16 @@ const ContactModal = ({ isOpen, closeModal }) => {
                   <Field as="textarea" name="message" className="form-control" rows="4" />
                   <ErrorMessage name="message" component="div" className="error-message" />
                 </div>
-
+                <div className="form-group">
+                  <label htmlFor="dateTime">Select Date & Time</label>
+                  <Field
+                    type="datetime-local"
+                    name="dateTime"
+                    className="form-control"
+                    onChange={(e) => setFieldValue('dateTime', e.target.value)}
+                  />
+                  <ErrorMessage name="dateTime" component="div" className="error-message" />
+                </div>
                 <div className="form-group">
                   <ReCAPTCHA
                     ref={recaptchaRef}
