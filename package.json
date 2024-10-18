@@ -7,13 +7,14 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "vite build && vite preview --host",
+    "start": "serve -s dist",
     "test:watch": "npx jest --watch --detectOpenHandles",
     "build-watch": "concurrently \"npx webpack --watch --mode development\" \"npm run sass\"",
     "sass": "node-sass public/styles/main.scss public/styles/style.css -w",
     "build:dev": "vite build && nodemon server/index.js"
   },
   "dependencies": {
+    "serve": "^14.0.1",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@fortawesome/fontawesome-free": "^6.6.0",
