@@ -1,9 +1,10 @@
-const express = require('express');
-const nodemailer = require('nodemailer');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const dotenv = require('dotenv'); // Import dotenv to load environment variables
-const app = express(); 
+import express from 'express';
+import nodemailer from 'nodemailer';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import dotenv from 'dotenv'; // Import dotenv to load environment variables
+
+const app = express();
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -15,25 +16,25 @@ app.use(bodyParser.json());
 async function verifyRecaptcha(captchaValue) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY; // Use the environment variable
   const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaValue}`;
-  
+
   const response = await fetch(verifyUrl, { method: 'POST' });
   const data = await response.json();
   return data.success;
 }
 
 // Helper function to send emails using Nodemailer
-async function sendEmail(fromEmail, subject, text) {
+async function sendEmail(toEmail, subject, text) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL_USER, // Use the environment variable
-      pass: process.env.EMAIL_PASS, // Use the environment variable
+      user: process.env.GMAIL_USER, // Use the environment variable
+      pass: process.env.GMAIL_PASS, // Use the environment variable
     },
   });
 
   const mailOptions = {
-    from: fromEmail,
-    to: process.env.EMAIL_RECEIVER, // Use the environment variable
+    to: toEmail,
+    from: process.env.GMAIL_USER, // Use the environment variable
     subject: subject,
     text: text,
   };
@@ -65,7 +66,16 @@ app.post('/api/contact', async (req, res) => {
 
 // Get a Quote form endpoint
 app.post('/api/quote', async (req, res) => {
-  const { name, email, phone, serviceType, captchaValue } = req.body;
+  const { name, email, phone, message, dateTime, captchaValue } = req.body;
+
+  // Log the incoming data to verify it's being received correctly
+  console.log('Received data from quote form:');
+  console.log('Name:', name);
+  console.log('Email:', email);
+  console.log('Phone:', phone);
+  console.log('Message:', message);
+  console.log('DateTime:', dateTime);
+  console.log('Captcha Value:', captchaValue);
 
   // Verify reCAPTCHA
   const isRecaptchaValid = await verifyRecaptcha(captchaValue);
@@ -75,7 +85,7 @@ app.post('/api/quote', async (req, res) => {
 
   // Prepare the email for the quote
   const emailSubject = 'New Get a Quote Form Submission';
-  const emailText = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nService Type: ${serviceType}`;
+  const emailText = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}\nDateTime: ${dateTime}`;
 
   try {
     await sendEmail(email, emailSubject, emailText);
@@ -85,4 +95,5 @@ app.post('/api/quote', async (req, res) => {
   }
 });
 
-module.exports = app;
+// Export the app for use in index.js
+export default app;

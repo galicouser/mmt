@@ -4,10 +4,12 @@
 
 @font-face {
   font-family: "CashMarket-Regular" !important;
-  src: local("CashMarket-Regular"), url('./assets/fonts/CashMarket-Regular.woff2') format('woff2');
+  src: local("CashMarket-Regular"), url('/assets/fonts/CashMarket-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
+
+
 
 :root {
   font-family: "CashMarket-Regular", system-ui, Avenir, Helvetica, Arial, sans-serif;
