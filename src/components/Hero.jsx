@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import videoSource from '../assets/videos/main.mp4';
 import heroImage from '../assets/images/hero_image.png';
 import '../assets/css/hero.css';
 import Testimonials from './Testimonials';

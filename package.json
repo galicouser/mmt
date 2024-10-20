@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "concurrently \"serve -s dist\" \"node server/index.mjs\"",
+    "start": "concurrently \"serve -s dist 5137\" \"node server/index.mjs\"",
     "test:watch": "npx jest --watch --detectOpenHandles",
     "build-watch": "concurrently \"npx webpack --watch --mode development\" \"npm run sass\"",
     "sass": "node-sass public/styles/main.scss public/styles/style.css -w",
