@@ -8,7 +8,9 @@ const app = express();
 
 dotenv.config(); // Load environment variables from .env file
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5137', // Allow requests from your frontend port
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
