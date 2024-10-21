@@ -12,6 +12,25 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+app.use(express.json());
+
+const paths = ['/', '/home', '/contact', '/services','/about us',];
+
+app.use(express.static(path.join(__dirname, '../dist')));
+
+const filePath = path.join(__dirname, '../dist/index.html'); // Example file path
+
+paths.forEach((route) => {
+  app.get(route, (req, res) => {
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        res.status(500).send(err);
+      }
+    });
+  });
+});
+
 // Helper function for reCAPTCHA verification
 async function verifyRecaptcha(captchaValue) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY; // Use the environment variable
