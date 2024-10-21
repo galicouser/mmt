@@ -8,13 +8,14 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "node": "node server/index.mjs",
-    "vite": "serve -s dist -l 5137",
-    "start": "concurrently \"npm run node\" \"npm run vite\"",
     "test:watch": "npx jest --watch --detectOpenHandles",
     "build-watch": "concurrently \"npx webpack --watch --mode development\" \"npm run sass\"",
     "sass": "node-sass public/styles/main.scss public/styles/style.css -w",
-    "build:dev": "vite build && nodemon server/index.mjs"
+    "build:dev": "vite build && nodemon server/index.mjs",
+    "node": "node server/index.mjs",
+    "vite": "vite preview",
+    "serve": "serve -s dist -l 5137",
+    "start": "concurrently \"npm run node\" \"npm run vite\""
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",

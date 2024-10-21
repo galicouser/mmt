@@ -2,20 +2,25 @@ import express from 'express';
 import nodemailer from 'nodemailer';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import dotenv from 'dotenv'; // Import dotenv to load environment variables
-
+import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
 
+const __dirname = path.dirname(__filename);
 dotenv.config(); // Load environment variables from .env file
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5137', // Allow requests from your frontend port
+}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
 app.use(express.json());
 
-const paths = ['/', '/home', '/contact', '/services','/about us',];
+const paths = ['/', '/contact', '/services','/about',];
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
