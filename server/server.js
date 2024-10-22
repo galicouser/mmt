@@ -38,10 +38,12 @@ paths.forEach((route) => {
 // Helper function for reCAPTCHA verification
 async function verifyRecaptcha(captchaValue) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY; // Use the environment variable
+  console.log(secretKey);
   const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaValue}`;
 
   const response = await fetch(verifyUrl, { method: 'POST' });
   const data = await response.json();
+  console.log(data);
   return data.success;
 }
 
