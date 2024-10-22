@@ -17,7 +17,6 @@ app.use(cors({
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-gt
 app.use(express.json());
 
 const paths = ['/', '/contact', '/services','/about',];
