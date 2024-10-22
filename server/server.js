@@ -12,7 +12,7 @@ const __dirname = path.dirname(__filename);
 dotenv.config(); // Load environment variables from .env file
 
 app.use(cors({
-  origin: 'https://maggiesmagictouch.com', // Allow requests from your frontend port
+  origin: '*', // Allows requests from any origin
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -38,10 +38,16 @@ paths.forEach((route) => {
 // Helper function for reCAPTCHA verification
 async function verifyRecaptcha(captchaValue) {
   const secretKey = process.env.RECAPTCHA_SECRET_KEY; // Use the environment variable
-  console.log(secretKey);
-  const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaValue}`;
+  console.log('RECAPTCHA_SECRET_KEY:', secretKey);
 
-  const response = await fetch(verifyUrl, { method: 'POST' });
+  const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: `secret=${secretKey}&response=${captchaValue}`
+  });
+  
   const data = await response.json();
   console.log(data);
   return data.success;
@@ -94,13 +100,13 @@ app.post('/api/quote', async (req, res) => {
   const { name, email, phone, message, dateTime, captchaValue } = req.body;
 
   // Log the incoming data to verify it's being received correctly
-  console.log('Received data from quote form:');
-  console.log('Name:', name);
-  console.log('Email:', email);
-  console.log('Phone:', phone);
-  console.log('Message:', message);
-  console.log('DateTime:', dateTime);
-  console.log('Captcha Value:', captchaValue);
+  // console.log('Received data from quote form:');
+  // console.log('Name:', name);
+  // console.log('Email:', email);
+  // console.log('Phone:', phone);
+  // console.log('Message:', message);
+  // console.log('DateTime:', dateTime);
+  // console.log('Captcha Value:', captchaValue);
 
   // Verify reCAPTCHA
   const isRecaptchaValid = await verifyRecaptcha(captchaValue);
