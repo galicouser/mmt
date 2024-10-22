@@ -11,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config(); // Load environment variables from .env file
 
-const allowedOrigins = ['http://localhost:5137', 'https://maggiesmagictouch.com/'];
+const allowedOrigins = ['https://maggiesmagictouch.com/'];
 
 app.use(cors({
   origin: (origin, callback) => {
