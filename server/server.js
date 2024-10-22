@@ -11,9 +11,22 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config(); // Load environment variables from .env file
 
+const allowedOrigins = ['http://localhost:5137', 'https://maggiesmagictouch.com/'];
+
 app.use(cors({
-  origin: 'http://localhost:5137', // Allow requests from your frontend port
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request if origin is in the allowed list
+    } else {
+      callback(new Error('Not allowed by CORS')); // Deny the request
+    }
+  },
+  credentials: true, // If you need to allow cookies or authentication headers
 }));
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

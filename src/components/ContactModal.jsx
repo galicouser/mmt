@@ -80,7 +80,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
   const handleSubmit = async (values, { resetForm }) => {
     console.log('Submitting form with values:', values);
     try {
-      const response = await fetch('http://localhost:5000/api/quote', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/quote`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
