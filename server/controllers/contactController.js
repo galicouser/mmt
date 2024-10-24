@@ -1,7 +1,7 @@
 // controllers/contactController.js
 import { sendEmail } from '../helpers/emailHelper.js';
 import { verifyRecaptcha } from '../helpers/recaptchaHelper.js';
-import { pool } from '../db/db.js'; // Make sure this is the correct path to your database configuration
+import { pool } from '../db/db.js';
 
 export const contactController = async (req, res) => {
   const { name, email, message, captchaValue } = req.body;
