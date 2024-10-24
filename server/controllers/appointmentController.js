@@ -1,7 +1,7 @@
 // controllers/appointmentController.js
 import { sendEmail } from '../helpers/emailHelper.js';
 import { verifyRecaptcha } from '../helpers/recaptchaHelper.js';
-import { pool } from '../db.js'; // Assuming you have a configured `pool` for PostgreSQL
+import { pool } from '../db/db.js';
 
 export const appointmentController = async (req, res) => {
   const { name, email, phone, message, dateTime, captchaValue, latitude, longitude, address } = req.body;
