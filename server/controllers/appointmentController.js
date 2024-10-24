@@ -35,7 +35,7 @@ export const appointmentController = async (req, res) => {
   try {
     // Save the appointment details to PostgreSQL
     const query = `
-      INSERT INTO appointments (name, email, phone, message, date_time, latitude, longitude, address)
+      INSERT INTO appointments (name, email, phone, message, dateTime, latitude, longitude, address)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;
     `;
     const values = [name, email, phone, message, dateTime, latitude, longitude, address];
