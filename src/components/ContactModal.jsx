@@ -76,8 +76,8 @@ const ContactModal = ({ isOpen, closeModal }) => {
           });
         },
         (error) => {
-          alertify.error('Unable to access your location. Falling back to IP-based location.');
-          fetchIPBasedLocation();
+          // alertify.error('Unable to access your location. Falling back to IP-based location.');
+          // fetchIPBasedLocation();
         }
       );
     } else {
@@ -94,7 +94,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
         longitude: data.longitude,
       });
     } catch (error) {
-      alertify.error('Unable to fetch location based on IP address.');
+      // alertify.error('Unable to fetch location based on IP address.');
     }
   };
 
