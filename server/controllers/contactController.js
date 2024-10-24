@@ -4,7 +4,7 @@ import { verifyRecaptcha } from '../helpers/recaptchaHelper.js';
 import { pool } from '../db/db.js';
 
 export const contactController = async (req, res) => {
-  const { name, email, message, captchaValue } = req.body;
+  const { name, email, phone, message, captchaValue } = req.body;
   
   // Verify reCAPTCHA
   const isRecaptchaValid = await verifyRecaptcha(captchaValue);
@@ -20,6 +20,7 @@ export const contactController = async (req, res) => {
       <h2 style="color: #333;">New Contact Form Submission</h2>
       <p><strong>Name:</strong> ${name}</p>
       <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
       <p><strong>Message:</strong><br>${message}</p>
       <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
       <p style="color: #888; font-size: 12px;">This message was sent from your website.</p>
@@ -30,10 +31,10 @@ export const contactController = async (req, res) => {
   try {
     // Save the contact details to PostgreSQL
     const query = `
-      INSERT INTO contacts (name, email, message)
-      VALUES ($1, $2, $3) RETURNING *;
+      INSERT INTO contacts (name, email, phone, message)
+      VALUES ($1, $2, $3, $4) RETURNING *;
     `;
-    const values = [name, email, message];
+    const values = [name, email, phone, message];
 
     const result = await pool.query(query, values);
 

@@ -24,6 +24,9 @@ module.exports = {
       dateTime: {
         type: Sequelize.DATE
       },
+      address: {
+        type: Sequelize.TEXT
+      },
       latitude: {  
         type: Sequelize.STRING,
         allowNull: true, 

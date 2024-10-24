@@ -35,7 +35,7 @@ export const appointmentController = async (req, res) => {
   try {
     // Save the appointment details to PostgreSQL
     const query = `
-      INSERT INTO "Appointments" (name, email, phone, message, "dateTime", latitude, longitude, address)
+      INSERT INTO "appointments" (name, email, phone, message, "dateTime", latitude, longitude, address)
       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;
     `;
     const values = [name, email, phone, message, dateTime, latitude, longitude, address];
@@ -49,5 +49,6 @@ export const appointmentController = async (req, res) => {
   } catch (error) {
     console.error('Error booking appointment:', error);
     res.status(500).json({ message: 'Failed to create Appointment' });
-  }  
+  }
+  
 };
