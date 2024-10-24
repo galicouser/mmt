@@ -4,20 +4,18 @@ import * as Yup from 'yup';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { LocalizationProvider, MobileDateTimePicker } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
 import '../assets/css/modal.css';
-// import '../assets/css/calendar.css';
 import backgroundImg from '../assets/images/contact_form/contact_form.jpeg';
 
 const now = new Date();
 const startOfToday = new Date();
 startOfToday.setHours(0, 0, 0, 0);
 
-const endOfToday = new Date(startOfToday);
-endOfToday.setDate(endOfToday.getDate() + 1);
-endOfToday.setSeconds(endOfToday.getSeconds() - 1);
-
 const ContactModal = ({ isOpen, closeModal }) => {
   const [selectedDateTime, setSelectedDateTime] = useState(startOfToday);
+  const [location, setLocation] = useState({ latitude: '', longitude: '' });
   const recaptchaRef = useRef();
 
   const initialValues = {
@@ -25,6 +23,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
     email: '',
     phone: '',
     message: '',
+    address: '',
     dateTime: null,
     captchaValue: '',
   };
@@ -34,75 +33,74 @@ const ContactModal = ({ isOpen, closeModal }) => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
     phone: Yup.string().required('Phone number is required'),
     message: Yup.string().required('Message is required').min(10, 'Message must be at least 10 characters long'),
+    address: Yup.string().required('Address is required'),
     dateTime: Yup.date().required('Please select a date and time').min(startOfToday, 'Date must be today or later'),
     captchaValue: Yup.string().required('Please complete the reCAPTCHA'),
   });
 
-  const fetchBookedSlots = async () => {
-    const calendarId = 'primary';
-    const apiKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY; // Ensure this key is set correctly
-    const timeMin = new Date();
-    const timeMax = new Date();
-    timeMax.setDate(timeMax.getDate() + 7);
-
-    const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}&timeMin=${timeMin.toISOString()}&timeMax=${timeMax.toISOString()}&singleEvents=true&orderBy=startTime`;
-
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Failed to fetch booked slots');
-      }
-
-      const data = await response.json();
-      const bookedSlots = data.items.map(event => event.start.dateTime || event.start.date);
-      return bookedSlots;
-    } catch (error) {
-      console.error('Error fetching booked slots:', error);
-      return [];
-    }
-  };
-
-  const generateAvailableSlots = (slots) => {
-    console.log('Booked slots:', slots);
-  };
-
-  useEffect(() => {
-    const loadBookedSlots = async () => {
-      const slots = await fetchBookedSlots();
-      generateAvailableSlots(slots);
-    };
-
-    if (isOpen) {
-      loadBookedSlots();
-    }
-  }, [isOpen]);
-
   const handleSubmit = async (values, { resetForm }) => {
-    console.log('Submitting form with values:', values);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/quote`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/appointment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...values, dateTime: selectedDateTime }),
+        body: JSON.stringify({ 
+          ...values, 
+          dateTime: selectedDateTime,
+          latitude: location.latitude,
+          longitude: location.longitude,
+        }),
       });
 
       if (response.ok) {
-        console.log('Form submission successful.');
-        alert('Message Sent Successfully!');
+        alertify.success('Message Sent Successfully!');
         resetForm();
         recaptchaRef.current.reset();
         closeModal();
       } else {
-        console.error('Form submission failed:', response);
-        alert('Failed to send message.');
+        alertify.error('Failed to send message.');
       }
     } catch (error) {
-      console.error('Error during form submission:', error);
-      alert('Error sending email. Please try again.');
+      alertify.error('Error sending email. Please try again.');
     }
   };
+
+  const fetchLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        (error) => {
+          alertify.error('Unable to access your location. Falling back to IP-based location.');
+          fetchIPBasedLocation();
+        }
+      );
+    } else {
+      fetchIPBasedLocation();
+    }
+  };
+
+  const fetchIPBasedLocation = async () => {
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      setLocation({
+        latitude: data.latitude,
+        longitude: data.longitude,
+      });
+    } catch (error) {
+      alertify.error('Unable to fetch location based on IP address.');
+    }
+  };
+
+  useEffect(() => {
+    fetchLocation();
+  }, []);
 
   return (
     isOpen && (
@@ -118,7 +116,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
           <button className="close-modal" onClick={closeModal}>
             &times;
           </button>
-          <h2 className="modal-title">Get a Free Quote</h2>
+          <h2 className="modal-title">Book Appointment</h2>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -127,27 +125,32 @@ const ContactModal = ({ isOpen, closeModal }) => {
             {({ isSubmitting, setFieldValue }) => (
               <Form>
                 <div className="form-group">
-                  <label htmlFor="name">Name</label>
-                  <Field type="text" name="name" className="form-control" />
-                  <ErrorMessage name="name" component="div" className="error-message" />
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+                  <Field type="text" id="name" name="name" className="form-control" />
+                  <ErrorMessage name="name" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <Field type="email" name="email" className="form-control" />
-                  <ErrorMessage name="email" component="div" className="error-message" />
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                  <Field type="email" id="email" name="email" className="form-control" />
+                  <ErrorMessage name="email" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="phone">Phone</label>
-                  <Field type="text" name="phone" className="form-control" />
-                  <ErrorMessage name="phone" component="div" className="error-message" />
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
+                  <Field type="text" id="phone" name="phone" className="form-control" />
+                  <ErrorMessage name="phone" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="message">Message</label>
-                  <Field as="textarea" name="message" className="form-control" rows="4" />
-                  <ErrorMessage name="message" component="div" className="error-message" />
+                  <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
+                  <Field type="text" id="address" name="address" className="form-control" />
+                  <ErrorMessage name="address" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="dateTime">Select Date & Time</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
+                  <Field as="textarea" id="message" name="message" className="form-control" rows="4" />
+                  <ErrorMessage name="message" component="div" className="text-red-600 text-sm font-semibold mt-1" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date & Time</label>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <MobileDateTimePicker
                       value={selectedDateTime}
@@ -155,11 +158,11 @@ const ContactModal = ({ isOpen, closeModal }) => {
                         setSelectedDateTime(newValue);
                         setFieldValue('dateTime', newValue);
                       }}
-                      minDate={startOfToday}  // Restrict to today and future dates
+                      minDate={startOfToday}
                       renderInput={(params) => <Field as="input" {...params} className="form-control" />}
                     />
                   </LocalizationProvider>
-                  <ErrorMessage name="dateTime" component="div" className="error-message" />
+                  <ErrorMessage name="dateTime" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
                 <div className="form-group">
                   <ReCAPTCHA
@@ -167,7 +170,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
                     sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                     onChange={(value) => setFieldValue('captchaValue', value)}
                   />
-                  <ErrorMessage name="captchaValue" component="div" className="error-message" />
+                  <ErrorMessage name="captchaValue" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
 
                 <button type="submit" className="submit-button" disabled={isSubmitting}>

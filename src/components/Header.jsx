@@ -91,7 +91,7 @@ const Header = () => {
             onClick={closeMenu} // Close menu on click
             className="block py-4 px-6 md:py-2 md:px-4 text-black hover:text-yellow-500 text-lg transition duration-300"
           >
-            ABOUT US
+            ABOUT
           </Link>
           <Link
             to="/contact"
