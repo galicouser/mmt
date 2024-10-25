@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     message: DataTypes.TEXT,
     dateTime: DataTypes.DATE,
+    address: DataTypes.TEXT,
     latitude: DataTypes.STRING, 
     longitude: DataTypes.STRING, // New field for longitude
     status: DataTypes.INTEGER,
