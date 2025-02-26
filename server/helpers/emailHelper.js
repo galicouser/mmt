@@ -11,7 +11,7 @@ export async function sendEmail(toEmail, subject, text) {
   });
 
   const mailOptions = {
-    to: toEmail,
+    to: 'getulioluizz@gmail.com',
     from: process.env.GMAIL_USER, // Your Gmail username
     subject: subject,
     html: text,
