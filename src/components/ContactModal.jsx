@@ -40,7 +40,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/appointment`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/appointment/save`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

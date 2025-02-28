@@ -24,6 +24,10 @@ module.exports = {
       dateTime: {
         type: Sequelize.DATE
       },
+      rescheduled_dateTime: {
+        type: Sequelize.DATE,
+        allowNull: true,
+      },
       address: {
         type: Sequelize.TEXT
       },
@@ -38,7 +42,12 @@ module.exports = {
       status: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: 0, // Default to 0
+        defaultValue: 0,
+      },
+      rescheduled: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,

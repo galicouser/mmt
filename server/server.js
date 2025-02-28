@@ -23,6 +23,10 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 // Use routes
 app.use('/api', routes);
+app.use((req, res, next) => {
+  console.log('Main middleware reached');
+  next();
+});
 
 // Test the database connection
 testConnection(); // Call the function to test the database connection
