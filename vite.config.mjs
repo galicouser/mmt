@@ -14,6 +14,9 @@ export default defineConfig({
   define: {
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'), // Set NODE_ENV
   },
+  server: {
+    historyApiFallback: true, // Ensures React Router handles the routes
+  },
   build: {
     // Set a custom chunk size warning limit (optional)
     chunkSizeWarningLimit: 1000, // Adjust to your desired limit in kB
