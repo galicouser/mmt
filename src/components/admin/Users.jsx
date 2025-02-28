@@ -15,20 +15,20 @@ import axios from 'axios';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.css';
 import bcrypt from 'bcryptjs';
-const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users`);
+
 const Users = () => {
   const initialNewUser = () => ({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
     role: 0,
-    phone: '',
-    address: '',
-    city: '',
-    state: '',
-    country: '',
-    postal_code: '',
-    status: '0',
+    phone: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+    postal_code: "",
+    status: "0",
   });
 
   const [users, setUsers] = useState([]);
@@ -38,22 +38,23 @@ const Users = () => {
   const [actionType, setActionType] = useState('');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      
-      setUsers(response.data.users);
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users`);
+      setUsers(response.data.users); // Ensure `response.data.users` exists
     } catch (error) {
-      console.error('Error fetching users:', error);
-      alertify.error('Failed to fetch users.');
+      console.error("Error fetching users:", error);
+      alertify.error("Failed to fetch users.");
     } finally {
       setLoading(false);
     }
   };
+
+
+  useEffect(() => {
+    fetchUsers(); // Call function inside useEffect AFTER defining it
+  }, []);
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 80 },
