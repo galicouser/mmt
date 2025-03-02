@@ -33,8 +33,8 @@ const ContactModal = ({ isOpen, closeModal }) => {
     email: Yup.string().email('Invalid email format').required('Email is required'),
     phone: Yup.string().required('Phone number is required'),
     message: Yup.string().required('Message is required').min(10, 'Message must be at least 10 characters long'),
-    // address: Yup.string().required('Address is required'),
-    // dateTime: Yup.date().required('Please select a date and time').min(startOfToday, 'Date must be today or later'),
+    address: Yup.string().required('Address is required'),
+    dateTime: Yup.date().required('Please select a date and time').min(startOfToday, 'Date must be today or later'),
     captchaValue: Yup.string().required('Please complete the reCAPTCHA'),
   });
 
@@ -47,7 +47,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
         },
         body: JSON.stringify({ 
           ...values, 
-          // dateTime: selectedDateTime,
+          dateTime: selectedDateTime,
           latitude: location.latitude,
           longitude: location.longitude,
         }),
@@ -108,7 +108,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
         <div
           className="modal-content"
           style={{
-            // backgroundImage: `url(${backgroundImg})`,
+            backgroundImage: `url(${backgroundImg})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -139,17 +139,17 @@ const ContactModal = ({ isOpen, closeModal }) => {
                   <Field type="text" id="phone" name="phone" className="form-control" />
                   <ErrorMessage name="phone" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
-                {/* <div className="form-group">
+                <div className="form-group">
                   <label htmlFor="address" className="block text-sm font-medium text-gray-700">Address</label>
                   <Field type="text" id="address" name="address" className="form-control" />
                   <ErrorMessage name="address" component="div" className="text-red-600 text-sm font-semibold mt-1" />
-                </div> */}
+                </div>
                 <div className="form-group">
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
                   <Field as="textarea" id="message" name="message" className="form-control" rows="4" />
                   <ErrorMessage name="message" component="div" className="text-red-600 text-sm font-semibold mt-1" />
                 </div>
-                {/* <div className="form-group">
+                <div className="form-group">
                   <label htmlFor="dateTime" className="block text-sm font-medium text-gray-700">Select Date & Time</label>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <MobileDateTimePicker
@@ -163,7 +163,7 @@ const ContactModal = ({ isOpen, closeModal }) => {
                     />
                   </LocalizationProvider>
                   <ErrorMessage name="dateTime" component="div" className="text-red-600 text-sm font-semibold mt-1" />
-                </div> */}
+                </div>
                 <div className="form-group">
                   <ReCAPTCHA
                     ref={recaptchaRef}

@@ -27,24 +27,23 @@ export const contactController = async (req, res) => {
     </body>
   </html>
   `;
-  await sendEmail(email, emailSubject, emailText);
-  res.status(200).json({ message: 'Contact form message sent successfully' });
-  // try {
-  //   // Save the contact details to PostgreSQL
-  //   const query = `
-  //     INSERT INTO contacts (name, email, phone, message)
-  //     VALUES ($1, $2, $3, $4) RETURNING *;
-  //   `;
-  //   const values = [name, email, phone, message];
 
-  //   const result = await pool.query(query, values);
+  try {
+    // Save the contact details to PostgreSQL
+    const query = `
+      INSERT INTO contacts (name, email, phone, message)
+      VALUES ($1, $2, $3, $4) RETURNING *;
+    `;
+    const values = [name, email, phone, message];
 
-  //   // Send the confirmation email
-  //   await sendEmail(email, emailSubject, emailText);
+    const result = await pool.query(query, values);
 
-  //   res.status(200).json({ message: 'Contact form message sent successfully', contact: result.rows[0] });
-  // } catch (error) {
-  //   console.error('Error processing contact form:', error);
-  //   res.status(500).json({ message: 'Failed to send contact form message' });
-  // }
+    // Send the confirmation email
+    await sendEmail(email, emailSubject, emailText);
+
+    res.status(200).json({ message: 'Contact form message sent successfully', contact: result.rows[0] });
+  } catch (error) {
+    console.error('Error processing contact form:', error);
+    res.status(500).json({ message: 'Failed to send contact form message' });
+  }
 };

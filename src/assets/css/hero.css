@@ -3,10 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-/* body {
+body {
   overflow-x: hidden;
   background: white;
-} */
+}
 
 .hero {
   background: linear-gradient(to right, #002B5C, #0057b7);
@@ -62,7 +62,7 @@
 /* In your header.css or a new CSS file */
 .retro-text {
   font-size: 2rem; /* Adjust size for smaller screens */
-  color: #f8f8ff; /* Bright yellow color */
+  color: #ffeb3b; /* Bright yellow color */
   position: relative; /* Position for pseudo-elements */
   animation: bulb 1.5s infinite alternate; /* Apply bulb effect animation */
 }
@@ -127,6 +127,6 @@
       0 0 0px rgba(255, 235, 59, 0.4);
   }
 }
-/* .slick-list {
-  overflow: hidden;
-} */
+.slick-list {
+  overflow: hidden;  /* Prevents slider overflow */
+}

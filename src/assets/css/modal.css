@@ -4,14 +4,13 @@
 @tailwind utilities;
 
 .modal-content {
-    /* background-color: rgba(255, 255, 255, 0.85); */
-    background-color: gray;
+    background-color: rgba(255, 255, 255, 0.85); /* Slight transparency */
     padding: 2rem;
     border-radius: 10px;
     width: 100%;
     max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* background-image: url('../images/services/background.jpeg'); */
+    background-image: url('../images/services/background.jpeg');
     background-size: cover; /* Make sure the image covers the entire modal */
     background-position: center;
     position: relative;

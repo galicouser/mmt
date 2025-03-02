@@ -4,7 +4,7 @@ import { verifyRecaptcha } from '../helpers/recaptchaHelper.js';
 import { pool } from '../db/db.js';
 
 export const SaveAppointment = async (req, res) => {
-  const { name, email, phone, message, captchaValue, latitude, longitude} = req.body;
+  const { name, email, phone, message, dateTime, captchaValue, latitude, longitude, address } = req.body;
   const rescheduled = 0;
   
   // Log the request body
@@ -26,34 +26,37 @@ export const SaveAppointment = async (req, res) => {
       <p><strong>Email:</strong> ${email}</p>
       <p><strong>Phone:</strong> ${phone}</p>
       <p><strong>Message:</strong><br>${message}</p>
+      <p><strong>Date & Time:</strong> ${dateTime}</p>
+      <p><strong>Address:</strong> ${address}</p>
+      <p><strong>Latitude:</strong> ${latitude}</p>
+      <p><strong>Longitude:</strong> ${longitude}</p>
       <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;">
       <p style="color: #888; font-size: 12px;">This message was sent from your website.</p>
     </body>
   </html>
   `;
-  await sendEmail(email, emailSubject, emailText);
-  res.status(200).json({ message: 'Appointment Booked' });
-  // try {
-  //   // Log the values before the query
-  //   const values = [name, email, phone, message, dateTime, latitude, longitude, address, rescheduled];
-  //   console.log('Inserting values:', values);
+
+  try {
+    // Log the values before the query
+    const values = [name, email, phone, message, dateTime, latitude, longitude, address, rescheduled];
+    console.log('Inserting values:', values);
   
-  //   // Save the appointment details to PostgreSQL
-  //   const query = `
-  //     INSERT INTO "appointments" (name, email, phone, message, "dateTime", latitude, longitude, address, rescheduled)
-  //     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;
-  //   `;
+    // Save the appointment details to PostgreSQL
+    const query = `
+      INSERT INTO "appointments" (name, email, phone, message, "dateTime", latitude, longitude, address, rescheduled)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *;
+    `;
     
-  //   const result = await pool.query(query, values);
+    const result = await pool.query(query, values);
   
-  //   // Send the confirmation email
-  //   await sendEmail(email, emailSubject, emailText);
+    // Send the confirmation email
+    await sendEmail(email, emailSubject, emailText);
   
-  //   res.status(200).json({ message: 'Appointment Booked', appointment: result.rows[0] });
-  // } catch (error) {
-  //   console.error('Error booking appointment:', error);
-  //   res.status(500).json({ message: 'Failed to create Appointment' });
-  // }
+    res.status(200).json({ message: 'Appointment Booked', appointment: result.rows[0] });
+  } catch (error) {
+    console.error('Error booking appointment:', error);
+    res.status(500).json({ message: 'Failed to create Appointment' });
+  }
 };
 
 

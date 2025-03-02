@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         {/* Footer Text */}
         <p className="text-center md:text-left">
-          &copy; {new Date().getFullYear()} Kaplan & Kaplan. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Maggie's Magic Touch. All Rights Reserved.
         </p>
         
         {/* Social Links */}

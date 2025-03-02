@@ -37,8 +37,6 @@ a:hover {
 
 html,
 body {
-  overflow-x: hidden;
-  background: white;
   height: 100%;
   margin: 0;
   /* display: flex; */
