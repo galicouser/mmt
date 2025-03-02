@@ -73,8 +73,8 @@ const Contact = () => {
 
   return (
     <section 
-      className="flex bg-gray-100 py-10" 
-      style={{ backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      className="flex bg-gray-800 py-10" 
+      // style={{ backgroundImage: `url(${backgroundImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
       <div className="container mx-auto py-10">
         <h2 className="text-3xl font-bold text-center mb-6 text-white">Contact Us</h2>
@@ -85,7 +85,10 @@ const Contact = () => {
           onSubmit={handleSubmit} 
         >
           {({ isSubmitting }) => (
-            <Form className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md" style={{ backgroundImage: `url(${contact_form_img})`, backgroundSize: 'cover' }}>
+            <Form className="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md" 
+            // style={{ backgroundImage: `url(${contact_form_img})`, backgroundSize: 'cover' }}
+            >
+              
               <div className="mb-4">
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                 <Field type="text" name="name" className="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring focus:ring-blue-500" />

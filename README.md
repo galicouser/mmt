@@ -1,4 +1,4 @@
-# 🌟 Realist
+# 🌟 KAPLAN & KAPLAN (Law Offices)
 
 A modern, full-stack web application built with **React**, **Node.js**, and **PostgreSQL**.
 
@@ -32,8 +32,8 @@ Make sure you have the following installed:
 ### **1️⃣ Clone the Repository**
 ```bash
 # Clone the project
-git clone https://github.com/spookey007/realist_react
-cd realist_react
+git clone https://github.com/spookey007/kaplan
+cd kaplan
 ```
 
 ### **2️⃣ Install Dependencies**

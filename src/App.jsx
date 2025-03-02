@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import Services from './components/Services';
+import PracticeAreas from './components/PracticeAreas';
 import About from './components/About';
 import Footer from './components/Footer';
 import Contact from './components/Contact';
@@ -30,7 +30,7 @@ const App = () => {
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Hero />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/practice-areas" element={<PracticeAreas />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/videos" element={<Videos />} />
